@@ -52,12 +52,27 @@
 
 <?php    echo "<h2>" . __( 'HealthSPORT Membership Requests', 'hs_login_membership_trdom' ) . "</h2>"; ?>
     <?php 
+		  echo "<table width='100%' border='1' cellspacing='1' cellpadding='1'>";
+		  echo "<tr><th>First Name</th><th>Last Name</th><th>Membership Number</th><th>E-mail</th><th>Date Created</th></tr>";
+
+		  $num = 0;
 		  $accounts = getAccounts(); 
-		  
 		  foreach( $accounts as $account )
 		  {
-			  echo "<b>First Name:</b> ".$account->firstname. " <b>Last Name:</b> ".$account->lastname."<br />";
+			  if( $num < $hs_login_membership_show_number )
+			  {
+				  echo "<tr>";
+				  echo "<td>".$account->firstname."</td>";
+				  echo "<td>".$account->lastname."</td>";
+				  echo "<td>".$account->membernumber."</td>";
+				  echo "<td>".$account->username."</td>";
+				  echo "<td>".date("l, F d Y H:i:s", $account->account_id)."</td>";
+				  echo "</tr>";
+			  }
+			  $num += 1;    
 		  }
+
+		  echo "</table>";
     ?>
 	
 

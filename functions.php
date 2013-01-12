@@ -208,7 +208,7 @@ function addUser($v,$shouldLogin=true)
                            $v["firstname"],                                                          
                            $v["lastname"],                                                        
                            $v["membernumber"],                                                        
-                           $v["email"],                                                        
+                           $v["username"],                                                        
                            $v["password"] );                                                        
 
     //Add the event to the database

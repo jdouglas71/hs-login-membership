@@ -191,6 +191,8 @@ function validateUser($v)
  */
 function addUser($v,$shouldLogin=true) 
 {
+	global $wpdb;
+
     //Validate $v
     $errors = array();
     if(!is_array($v))
@@ -198,38 +200,37 @@ function addUser($v,$shouldLogin=true)
         return array("Error processing data, please try again.");
     }
 
-    //Testing.
-    //$errors[] = "username: " . $v["username"] . "<br/>";
-    //$errors[] = "password: " . $v["password"] . "<br/>";
-    //$errors[] = "confirm password: " . $v["confirm_password"] . "<br/>";
-    //$errors[] = "display name: " . $v["display_name"] . "<br/>";
-    //$errors[] = "email: " . $v["cEmail"] . "<br/>";
+	$keys = "account_id, firstname, lastname, membernumber, email, password";
+	$vals = "%d, %s, %s, %s, %s, %s";
 
-    //Insert the user
-	/*
-    $user_id = wp_insert_user( array("user_login"=>$v["username"], 
-                                     "user_pass"=>$v["password"]
-                                     );
-    if( is_wp_error($user_id) )
-    {
-        $errors[] = $user_id->get_error_message();
-    }
-    else
-    {
-        add_filter('wp_mail_content_type',create_function('', 'return "text/html"; '));
-        $message = "A new user account has been created for HealthSPORT."."\n";
-        $message .= "Username: " . $v["user_name"] . "\n";
-        $message .= "Email: " . $v["email"] . "\n";
+    $sql = $wpdb->prepare( "INSERT INTO ".CSI_ACCOUNTS_TABLE." ($keys) values ($vals);",   
+                           time(), //Use this value as the account id.                            
+                           $v["firstname"],                                                          
+                           $v["lastname"],                                                        
+                           $v["membernumber"],                                                        
+                           $v["email"],                                                        
+                           $v["password"] );                                                        
 
-        wp_mail( NOTIFIER, "User Account Created", $message );
-        wp_mail( $v["cEmail"], "HealthSPORT Membership", $message );
-         
-        //if( $shouldLogin )
-        //{
-        //    $errors = loginUser($v);
-        //}
-    }
-	*/
+    //Add the event to the database
+    $result = $wpdb->query( $sql );
+
     return $errors;
 }
 
+/**
+ * Get Accounts.
+ */
+function getAccounts()
+{
+    global $wpdb;
+
+    $results = $wpdb->get_results( "SELECT * FROM ".CSI_ACCOUNTS_TABLE.";" ); 
+    $accounts = array();
+
+	foreach( $results as $account )
+	{
+		$accounts[] = $account;
+	}
+
+    return $accounts;
+}

@@ -58,6 +58,18 @@ function hs_login_membership_install()
 	global $hs_login_membership_version;
 	global $hs_login_membership_csi_url;
 
+    //Create the events table
+    $sql = "CREATE TABLE ".CSI_ACCOUNTS_TABLE." (".             
+           "account_id bigint NOT NULL DEFAULT '0', ".   
+		   "firstname text NULL DEFAULT NULL, ".         
+		   "lastname text NULL DEFAULT NULL, ".         
+		   "membernumber text NULL DEFAULT NULL, ".         
+		   "email text NULL DEFAULT NULL, ".         
+           "password text NULL DEFAULT NULL, ".         
+           "PRIMARY KEY (account_id)".                      
+           ");";                                        
+
+    $result = $wpdb->query( $sql );
 
 	//add/update Options
 	if( !add_option(HS_LOGIN_MEMBERSHIP_VERSION, $hs_login_membership_version) )
@@ -77,6 +89,9 @@ function hs_login_membership_install()
 function hs_login_membership_uninstall()
 {
 	global $wpdb;
+
+	//Drop the accounts table
+	$result = $wpdb->query( "DROP TABLE ".CSI_ACCOUNTS_TABLE.";" );
 
 	//Clear out options
 	delete_option( HS_LOGIN_MEMBERSHIP_VERSION );

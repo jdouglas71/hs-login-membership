@@ -36,6 +36,14 @@
 </form>
 
 <?php    echo "<h2>" . __( 'HealthSPORT Membership Requests', 'hs_login_membership_trdom' ) . "</h2>"; ?>
+    <?php 
+		  $accounts = getAccounts(); 
+		  foreach( $accounts as $account )
+		  {
+			  echo "<b>First Name:</b> ".$account->firstname. " <b>Last Name:</b> ".$account->lastname."<br />";
+		  }
+    ?>
+	
 
 
 </div>

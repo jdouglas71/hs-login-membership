@@ -10,6 +10,9 @@ define('HS_LOGIN_MEMBERSHIP_CSS', HS_LOGIN_MEMBERSHIP_CALLBACK_DIR."hs-login-mem
 define('HS_LOGIN_MEMBERSHIP_PAGE', "add-account" );
 define('HS_LOGIN_MEMBERSHIP_CSI_URL', "hs_login_membership_csi_url");
 
+/**Tables*/
+define('CSI_ACCOUNTS_TABLE', $wpdb->prefix."csi_accounts");
+
 /** Logfile */
 define('LOGFILE', HS_LOGIN_MEMBERSHIP_DIR.'HS_LOGIN_MEMBERSHIP.log');
 /** WordPress Script Debug Flag */

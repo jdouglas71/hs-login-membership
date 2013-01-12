@@ -57,6 +57,7 @@ function hs_login_membership_install()
 	global $wpdb;
 	global $hs_login_membership_version;
 	global $hs_login_membership_csi_url;
+	global $hs_login_membership_show_number;
 
     //Create the events table
     $sql = "CREATE TABLE ".CSI_ACCOUNTS_TABLE." (".             
@@ -81,6 +82,11 @@ function hs_login_membership_install()
 	{
 		update_option(HS_LOGIN_MEMBERSHIP_CSI_URL, $hs_login_membership_csi_url);
 	}
+
+	if( !add_option(HS_LOGIN_MEMBERSHIP_SHOW_NUMBER, $hs_login_membership_show_number) )
+	{
+		update_option(HS_LOGIN_MEMBERSHIP_SHOW_NUMBER, $hs_login_membership_show_number);
+	}
 }
 
 /**
@@ -96,6 +102,7 @@ function hs_login_membership_uninstall()
 	//Clear out options
 	delete_option( HS_LOGIN_MEMBERSHIP_VERSION );
 	delete_option( HS_LOGIN_MEMBERSHIP_CSI_URL );
+	delete_option( HS_LOGIN_MEMBERSHIP_SHOW_NUMBER );
 }
 
 /**
@@ -105,11 +112,13 @@ function hs_login_membership_init()
 {
 	global $hs_login_membership_version;
 	global $hs_login_membership_csi_url;
+	global $hs_login_membership_show_number;
 
 	if( !is_admin() )
 	{
 		$hs_login_membership_version = get_option( HS_LOGIN_MEMBERSHIP_VERSION );
 		$hs_login_membership_csi_url = get_option( HS_LOGIN_MEMBERSHIP_CSI_URL );
+		$hs_login_membership_show_number = get_option( HS_LOGIN_MEMBERSHIP_SHOW_NUMBER );
 	}
 }
 

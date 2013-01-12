@@ -1,0 +1,65 @@
+/*
+*  HealthSPORT Login Membership Plugin Styles
+*/
+
+
+.hs_login_membership_label
+{
+	margin: 5px;
+}
+
+
+.hs_login_membership_input
+{
+	margin: 5px;
+	border-radius: 5px;
+}
+
+.hs_login_membership_submit
+{
+	margin: 5px 5px 5px 0px;
+	border-radius: 5px;
+}
+
+.hs_form_button
+{
+   	border-radius: 5px;
+	padding: 3px;
+	box-shadow: 3px 3px 3px #888;
+}
+
+.hs_main_div
+{
+}
+
+.hs_login_div
+{
+	padding: 5px;
+}
+
+.hs_membership_div
+{
+	padding: 5px;
+}
+
+.hs_login_membership_header
+{
+
+}
+
+.hs_login_membership_login_message
+{
+   	color: blue;
+}
+
+.hs_login_membership_message
+{
+   	color: blue;
+}
+
+.hs_login_membership_error_message
+{
+   	color: red;
+}
+
+

@@ -224,7 +224,7 @@ function getAccounts()
 {
     global $wpdb;
 
-    $results = $wpdb->get_results( "SELECT * FROM ".CSI_ACCOUNTS_TABLE.";" ); 
+    $results = $wpdb->get_results( "SELECT * FROM ".CSI_ACCOUNTS_TABLE." order by account_id DESC;" ); 
     $accounts = array();
 
 	foreach( $results as $account )

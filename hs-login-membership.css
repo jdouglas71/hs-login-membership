@@ -62,4 +62,16 @@
    	color: red;
 }
 
+#hs-login-membership-accounts-table th
+{
+   	background: #b9a1b3;
+	color: black;
+}
+
+#hs-login-membership-accounts-table td
+{
+   	background: #a7a5b9;
+	color: black;
+	padding: 3px;
+}
 

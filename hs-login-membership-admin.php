@@ -52,9 +52,10 @@
 
 <?php    echo "<h2>" . __( 'HealthSPORT Membership Requests', 'hs_login_membership_trdom' ) . "</h2>"; ?>
     <?php 
-		  echo "<table width='100%' border='1' cellspacing='1' cellpadding='1'>";
+		  echo "<table id='hs-login-membership-accounts-table' width='100%' border='0' cellspacing='1' cellpadding='1'>";
 		  echo "<tr><th>First Name</th><th>Last Name</th><th>Membership Number</th><th>E-mail</th><th>Date Created</th></tr>";
 
+		  date_default_timezone_set( "PDT" );
 		  $num = 0;
 		  $accounts = getAccounts(); 
 		  foreach( $accounts as $account )

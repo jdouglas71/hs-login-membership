@@ -25,7 +25,16 @@ register_activation_hook( __FILE__, 'hs_login_membership_install' );
 register_deactivation_hook( __FILE__, 'hs_login_membership_uninstall' );
 
 /** Admin Stuff **/
+add_action( 'admin_init', 'hs_login_membership_admin_init' );
 add_action( 'admin_menu', 'hs_login_membership_admin_menu' );
+
+/**
+ * Add my style sheet to the admin page.
+ */
+function hs_login_membership_admin_init()
+{
+	wp_register_style( 'hs_login_membership_css', plugins_url('hs-login-membership.css', __FILE__) );
+}
 
 /**
  * Add our admin menu to the dashboard.
@@ -33,7 +42,17 @@ add_action( 'admin_menu', 'hs_login_membership_admin_menu' );
 function hs_login_membership_admin_menu()
 {
 	global $hs_icon_url;
-	add_menu_page( 'HealthSPORT Membership', 'HealthSPORT Membership', 'administrator', 'hs_login_membership', 'hs_login_membership_admin_page', $hs_icon_url);
+	$page = add_menu_page( 'HealthSPORT Membership', 'HealthSPORT Membership', 'administrator', 'hs_login_membership', 'hs_login_membership_admin_page', $hs_icon_url);
+
+	add_action( 'admin_print_styles-'.$page, 'hs_login_membership_admin_styles' );
+}
+
+/**
+ * Enqueue the style sheet for the admin page.
+ */
+function hs_login_membership_admin_styles()
+{
+	wp_enqueue_style( 'hs_login_membership_css' );
 }
 
 /**
@@ -97,7 +116,7 @@ function hs_login_membership_uninstall()
 	global $wpdb;
 
 	//Drop the accounts table
-	$result = $wpdb->query( "DROP TABLE ".CSI_ACCOUNTS_TABLE.";" );
+	//$result = $wpdb->query( "DROP TABLE ".CSI_ACCOUNTS_TABLE.";" );
 
 	//Clear out options
 	delete_option( HS_LOGIN_MEMBERSHIP_VERSION );

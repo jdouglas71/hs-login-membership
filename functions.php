@@ -2,14 +2,13 @@
 
 //User functions
 //require_once(ABSPATH . WPINC . '/registration.php');
+require_once( ABSPATH . WPINC . '/class-phpmailer.php' );
 
 /**
  * Login form
  */
 function hs_login_form($width="100%")
 {
-	global $hs_login_membership_csi_url;
-
     $retval = "";
 
 	//$retval .= "<div class='hs_main_div'>"; 
@@ -18,7 +17,7 @@ function hs_login_form($width="100%")
 	$retval .= "<tr><td style='vertical-align:top;'>";
 	$retval .= "<div class='hs_login_div'>";
 	$retval .= "<h2 class='hs_login_membership_header'>Registered Customers</h2>";
-	$retval .= "<iframe frameborder='0' height='130' marginheight='1' marginwidth='1' scrolling='no' src='".$hs_login_membership_csi_url."' width='690' height='310'></iframe>";
+	$retval .= "<iframe frameborder='0' height='130' marginheight='1' marginwidth='1' scrolling='no' src='".get_option(HS_LOGIN_MEMBERSHIP_CSI_URL)."' width='690' height='310'></iframe>";
 	//$retval .= "<form id='hs-login-form' method='POST'>";
 	//$retval .= "<table class='hs_login_membership_table' width='100%' border='0' cellspacing='0' cellpadding='0'>";
 	//$retval .= "<tr><td id='hs_login_membership_messages' colspan='2'></td></tr>";
@@ -192,7 +191,6 @@ function validateUser($v)
 function addUser($v) 
 {
 	global $wpdb;
-	global $hs_login_membership_email_notify;
 
     //Validate $v
     $errors = array();
@@ -217,56 +215,23 @@ function addUser($v)
 
 	//Send an email with a CSV file (http://stackoverflow.com/questions/5816421/send-csv-file-attached-to-the-email)
 	$cr = "\n";                                                                                                    
-    $csvdata = "First Name" . ',' . "Last Name"  . "Member Number". "," . "E-mail". "," . "Password" . $cr;
+    $csvdata = "First Name" . ',' . "Last Name" . "," . "Member Number". "," . "E-mail". "," . "Password" . $cr;
     $csvdata .= $v["firstname"] . ',' . $v["lastname"] . ',' . $v["membernumber"] . ',' . $v["username"] . ',' . $v["password"] . $cr;
 
-    $thisfile = 'new_account.csv';
+	$mailer = new PHPMailer();
 
-    $encoded = chunk_split(base64_encode($csvdata));
+	$mailer->AddAddress( get_option(HS_LOGIN_MEMBERSHIP_EMAIL_NOTIFY ) );
+	$mailer->From = "healthsport.com";
+	$mailer->FromName = "HealthSPORT Membership Plugin";
+	$mailer->Subject = "HealthSPORT Membership Request";
+	$mailer->Body = "The attached file contains the information for the account request.\n\nThe Data:\n\n".$csvdata;
 
-    // create the email and send it off
+	$mailer->AddStringAttachment( $cvsdata, "new_account.txt" );
 
-    $subject = "HealthSPORT Membership Creation";
-    $from = "healthsport.com";
-    $headers = 'MIME-Version: 1.0' . "\n";
-    $headers .= 'Content-Type: multipart/mixed;
-        boundary="----=_NextPart_001_0011_1234ABCD.4321FDAC"' . "\n";
-
-    $message = '
-
-    This is a multi-part message in MIME format.
-
-    ------=_NextPart_001_0011_1234ABCD.4321FDAC
-    Content-Type: text/plain;
-            charset="us-ascii"
-    Content-Transfer-Encoding: 7bit
-
-    Hello
-
-	The attached CSV file contains a new account request from healthsport.com.
-
-    Regards
-
-    ------=_NextPart_001_0011_1234ABCD.4321FDAC
-    Content-Type: application/octet-stream;  name="';
-
-    $message .= "$thisfile";
-    $message .= '"
-    Content-Transfer-Encoding: base64
-    Content-Disposition: attachment; filename="';
-    $message .= "$thisfile";
-    $message .= '"
-
-    ';
-    $message .= "$encoded";
-    $message .= '
-
-    ------=_NextPart_001_0011_1234ABCD.4321FDAC--
-
-    ';
-
-    // now send the email
-    mail($hs_login_membership_email_notify, $subject, $message, $headers, "-f$from");
+	if( !$mailer->Send() )
+	{
+		$errors[] = "Error Sending Notification Email: ". $mailer->ErrorInfo;
+	}
 
     return $errors;
 }

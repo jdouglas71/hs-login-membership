@@ -72,7 +72,7 @@
 				  echo "<td>".$account->firstname."</td>";
 				  echo "<td>".$account->lastname."</td>";
 				  echo "<td>".$account->membernumber."</td>";
-				  echo "<td>".$account->username."</td>";
+				  echo "<td>".$account->email."</td>";
 				  echo "<td>".date("l, F d Y H:i:s", $account->account_id)."</td>";
 				  echo "</tr>";
 			  }

@@ -189,7 +189,7 @@ function validateUser($v)
 /**
  * Add the User Account
  */
-function addUser($v,$shouldLogin=true) 
+function addUser($v) 
 {
 	global $wpdb;
 	global $hs_login_membership_email_notify;

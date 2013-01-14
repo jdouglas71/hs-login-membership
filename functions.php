@@ -192,6 +192,7 @@ function validateUser($v)
 function addUser($v,$shouldLogin=true) 
 {
 	global $wpdb;
+	global $hs_login_membership_email_notify;
 
     //Validate $v
     $errors = array();
@@ -211,8 +212,61 @@ function addUser($v,$shouldLogin=true)
                            $v["username"],                                                        
                            $v["password"] );                                                        
 
-    //Add the event to the database
+    //Add the account to the database
     $result = $wpdb->query( $sql );
+
+	//Send an email with a CSV file (http://stackoverflow.com/questions/5816421/send-csv-file-attached-to-the-email)
+	$cr = "\n";                                                                                                    
+    $csvdata = "First Name" . ',' . "Last Name"  . "Member Number". "," . "E-mail". "," . "Password" . $cr;
+    $csvdata .= $v["firstname"] . ',' . $v["lastname"] . ',' . $v["membernumber"] . ',' . $v["username"] . ',' . $v["password"] . $cr;
+
+    $thisfile = 'new_account.csv';
+
+    $encoded = chunk_split(base64_encode($csvdata));
+
+    // create the email and send it off
+
+    $subject = "HealthSPORT Membership Creation";
+    $from = "healthsport.com";
+    $headers = 'MIME-Version: 1.0' . "\n";
+    $headers .= 'Content-Type: multipart/mixed;
+        boundary="----=_NextPart_001_0011_1234ABCD.4321FDAC"' . "\n";
+
+    $message = '
+
+    This is a multi-part message in MIME format.
+
+    ------=_NextPart_001_0011_1234ABCD.4321FDAC
+    Content-Type: text/plain;
+            charset="us-ascii"
+    Content-Transfer-Encoding: 7bit
+
+    Hello
+
+	The attached CSV file contains a new account request from healthsport.com.
+
+    Regards
+
+    ------=_NextPart_001_0011_1234ABCD.4321FDAC
+    Content-Type: application/octet-stream;  name="';
+
+    $message .= "$thisfile";
+    $message .= '"
+    Content-Transfer-Encoding: base64
+    Content-Disposition: attachment; filename="';
+    $message .= "$thisfile";
+    $message .= '"
+
+    ';
+    $message .= "$encoded";
+    $message .= '
+
+    ------=_NextPart_001_0011_1234ABCD.4321FDAC--
+
+    ';
+
+    // now send the email
+    mail($hs_login_membership_email_notify, $subject, $message, $headers, "-f$from");
 
     return $errors;
 }

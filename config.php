@@ -13,6 +13,7 @@ define('HS_LOGIN_MEMBERSHIP_PAGE', "add-account" );
 define('HS_LOGIN_MEMBERSHIP_VERSION', "hs_login_membership_version");
 define('HS_LOGIN_MEMBERSHIP_CSI_URL', "hs_login_membership_csi_url");
 define('HS_LOGIN_MEMBERSHIP_SHOW_NUMBER', "hs_login_membership_show_number" );
+define('HS_LOGIN_MEMBERSHIP_EMAIL_NOTIFY', "hs_login_membership_email_notify" );
 
 /**Tables*/
 define('CSI_ACCOUNTS_TABLE', $wpdb->prefix."csi_accounts");
@@ -34,6 +35,9 @@ $hs_icon_url = "http://healthsport.com/favicon.ico";
 
 global $hs_login_membership_show_number;
 $hs_login_membership_show_number = 25;
+
+global $hs_login_membership_email_notify;
+$hs_login_membership_email_notify = "ttomlinson@healthsport.com";
 
 /** Scripts */
 require_once(HS_LOGIN_MEMBERSHIP_DIR.'functions.php');

@@ -77,6 +77,8 @@ function hs_login_membership_install()
 	global $hs_login_membership_version;
 	global $hs_login_membership_csi_url;
 	global $hs_login_membership_show_number;
+	global $hs_login_membership_email_notify;
+	
 
     //Create the events table
     $sql = "CREATE TABLE ".CSI_ACCOUNTS_TABLE." (".             
@@ -106,6 +108,11 @@ function hs_login_membership_install()
 	{
 		update_option(HS_LOGIN_MEMBERSHIP_SHOW_NUMBER, $hs_login_membership_show_number);
 	}
+
+	if( !add_option(HS_LOGIN_MEMBERSHIP_EMAIL_NOTIFY, $hs_login_membership_email_notify) )
+	{
+		update_option(HS_LOGIN_MEMBERSHIP_EMAIL_NOTIFY, $hs_login_membership_email_notify);
+	}
 }
 
 /**
@@ -122,6 +129,7 @@ function hs_login_membership_uninstall()
 	delete_option( HS_LOGIN_MEMBERSHIP_VERSION );
 	delete_option( HS_LOGIN_MEMBERSHIP_CSI_URL );
 	delete_option( HS_LOGIN_MEMBERSHIP_SHOW_NUMBER );
+	delete_option( HS_LOGIN_MEMBERSHIP_EMAIL_NOTIFY );
 }
 
 /**
@@ -132,13 +140,17 @@ function hs_login_membership_init()
 	global $hs_login_membership_version;
 	global $hs_login_membership_csi_url;
 	global $hs_login_membership_show_number;
+	global $hs_login_membership_email_notify;
 
 	if( !is_admin() )
 	{
 		$hs_login_membership_version = get_option( HS_LOGIN_MEMBERSHIP_VERSION );
 		$hs_login_membership_csi_url = get_option( HS_LOGIN_MEMBERSHIP_CSI_URL );
 		$hs_login_membership_show_number = get_option( HS_LOGIN_MEMBERSHIP_SHOW_NUMBER );
+		$hs_login_membership_email_notify = get_option( HS_LOGIN_MEMBERSHIP_EMAIL_NOTIFY );
 	}
+
+	wp_register_style( 'hs_login_membership_css', plugins_url('hs-login-membership.css', __FILE__) );
 }
 
 /**
@@ -148,8 +160,10 @@ function hs_login_form_shortcode($atts, $content=null)
 {
 	//Extract atts
 
-	$retval = "<link rel='stylesheet' href='".HS_LOGIN_MEMBERSHIP_CSS."' type='text/css' media='screen'/>".
-		       hs_login_form(); 
+	wp_enqueue_style( 'hs_login_membership_css' );
+
+	//$retval = "<link rel='stylesheet' href='".HS_LOGIN_MEMBERSHIP_CSS."' type='text/css' media='screen'/>".
+	$retval = hs_login_form(); 
 
 	return $retval;
 }
@@ -161,8 +175,10 @@ function hs_membership_form_shortcode($atts, $content=null)
 {
 	//Extract atts
 
-	$retval = "<link rel='stylesheet' href='".HS_LOGIN_MEMBERSHIP_CSS."' type='text/css' media='screen'/>".
-		       hs_membership_form(); 
+	wp_enqueue_style( 'hs_login_membership_css' );
+
+	//$retval = "<link rel='stylesheet' href='".HS_LOGIN_MEMBERSHIP_CSS."' type='text/css' media='screen'/>".
+	$retval = hs_membership_form(); 
 
 	return $retval;
 }

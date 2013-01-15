@@ -14,10 +14,10 @@ function hs_login_form($width="100%")
 	//$retval .= "<div class='hs_main_div'>"; 
 	$retval .= "<table class='hs_login_membership_main_table' width='100%' border='0' cellspacing='0' cellpadding='0'>";
 
-	$retval .= "<tr><td style='vertical-align:top;'>";
+	$retval .= "<tr><td style='vertical-align:top;width:40%''>";
 	$retval .= "<div class='hs_login_div'>";
 	$retval .= "<h2 class='hs_login_membership_header'>Registered Customers</h2>";
-	$retval .= "<iframe frameborder='0' height='130' marginheight='1' marginwidth='1' scrolling='no' src='".get_option(HS_LOGIN_MEMBERSHIP_CSI_URL)."' width='690' height='310'></iframe>";
+	$retval .= "<iframe frameborder='0' marginheight='1' marginwidth='1' scrolling='no' src='".get_option(HS_LOGIN_MEMBERSHIP_CSI_URL)."' height='250'></iframe>";
 	//$retval .= "<form id='hs-login-form' method='POST'>";
 	//$retval .= "<table class='hs_login_membership_table' width='100%' border='0' cellspacing='0' cellpadding='0'>";
 	//$retval .= "<tr><td id='hs_login_membership_messages' colspan='2'></td></tr>";
@@ -38,8 +38,8 @@ function hs_login_form($width="100%")
 	//$retval .= "</table>";
 	//$retval .= "</form>";
 	//$retval .= "<a href='".wp_lostpassword_url()."' title='Lost Password'>Lost Password?</a>";
-	$retval .= "</div>";
-	$retval .= "</td>";
+	//$retval .= "</div>";
+	//$retval .= "</td>";
 
 	$retval .= "<td style='vertical-align:top;'>";
 	$retval .= "<div class='hs_membership_div'>";

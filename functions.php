@@ -214,19 +214,21 @@ function addUser($v)
     $result = $wpdb->query( $sql );
 
 	//Send an email with a CSV file (http://stackoverflow.com/questions/5816421/send-csv-file-attached-to-the-email)
-	$cr = "\n";                                                                                                    
-    $csvdata = "First Name" . ',' . "Last Name" . "," . "Member Number". "," . "E-mail". "," . "Password" . $cr;
+	$cr = "\n"; 
+	$csvdata = "";
+    $csvdata .= "First Name" . ',' . "Last Name" . "," . "Member Number". "," . "E-mail". "," . "Password" . $cr;
     $csvdata .= $v["firstname"] . ',' . $v["lastname"] . ',' . $v["membernumber"] . ',' . $v["username"] . ',' . $v["password"] . $cr;
 
 	$mailer = new PHPMailer();
 
 	$mailer->AddAddress( get_option(HS_LOGIN_MEMBERSHIP_EMAIL_NOTIFY ) );
+	//$mailer->AddAddress( "jdouglas71@gmail.com" );
 	$mailer->From = "healthsport.com";
 	$mailer->FromName = "HealthSPORT Membership Plugin";
 	$mailer->Subject = "HealthSPORT Membership Request";
 	$mailer->Body = "The attached file contains the information for the account request.\n\nThe Data:\n\n".$csvdata;
 
-	$mailer->AddStringAttachment( $cvsdata, "new_account.txt" );
+	$mailer->AddStringAttachment( $csvdata, "new_account.csv" );
 
 	if( !$mailer->Send() )
 	{

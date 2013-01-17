@@ -3,6 +3,10 @@
 //User functions
 //require_once(ABSPATH . WPINC . '/registration.php');
 require_once( ABSPATH . WPINC . '/class-phpmailer.php' );
+//Zend Library INclude path (for google docs integration)
+set_include_path( HS_LOGIN_MEMBERSHIP_CALLBACK_DIR . "ZendGdata-1.12.1/library" );
+include_once( HS_LOGIN_MEMBERSHIP_CALLBACK_DIR . "google-spreadsheet/Google_Spreadsheet.php" );
+
 
 /**
  * Login form
@@ -64,7 +68,7 @@ function hs_membership_form($width="100%")
 {
     $retval = "";
 
-	$retval .= "<form id='hs-login-form' method='POST'>";
+	$retval .= "<form id='hs-membership-form' method='POST'>";
 	$retval .= "<table class='hs_login_membership_table' width='100%' border='0' cellspacing='0' cellpadding='0'>";
 	$retval .= "<tr><td id='hs_login_membership_messages' colspan='2'></td></tr>";
 
@@ -214,6 +218,7 @@ function addUser($v)
     $result = $wpdb->query( $sql );
 
 	//Send an email with a CSV file (http://stackoverflow.com/questions/5816421/send-csv-file-attached-to-the-email)
+	/*
 	$cr = "\n"; 
 	$csvdata = "";
     $csvdata .= "First Name" . ',' . "Last Name" . "," . "Member Number". "," . "E-mail". "," . "Password" . $cr;
@@ -234,6 +239,28 @@ function addUser($v)
 	{
 		$errors[] = "Error Sending Notification Email: ". $mailer->ErrorInfo;
 	}
+	*/
+
+	//Update Google SpreadSheet
+	$u = "jdouglas71@gmail.com";
+	$p = "!!__GOOG_jgd71";
+
+	$ss = new Google_Spreadsheet( $u, $p );
+	$ss->useSpreadsheet( "Form Test" );
+
+	//$row = array
+	//	(
+	//		"First Name" => $v["firstname"],
+	//		"Last Name" => $v["lastname"],
+	//		"Member Number" => $v["membernumber"], 
+	//		"Email" => $v["username"], 
+	//		"Password" => $v["password"]
+	//	);
+
+	//if( !$ss->addRow($row) )
+	//{
+	//	$errors[] = "Error, unable to store spreadsheet data.";
+	//}
 
     return $errors;
 }

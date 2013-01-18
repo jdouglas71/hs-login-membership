@@ -78,6 +78,7 @@ function hs_login_membership_install()
 	global $hs_login_membership_csi_url;
 	global $hs_login_membership_show_number;
 	global $hs_login_membership_email_notify;
+	global $hs_login_membership_google_form;
 	
 
     //Create the events table
@@ -113,6 +114,12 @@ function hs_login_membership_install()
 	{
 		update_option(HS_LOGIN_MEMBERSHIP_EMAIL_NOTIFY, $hs_login_membership_email_notify);
 	}
+
+	if( !add_option(HS_LOGIN_MEMBERSHIP_GOOGLE_FORM, $hs_login_membership_google_form) )
+	{
+		update_option(HS_LOGIN_MEMBERSHIP_GOOGLE_FORM, $hs_login_membership_email_google_form);
+	}
+
 }
 
 /**
@@ -123,13 +130,14 @@ function hs_login_membership_uninstall()
 	global $wpdb;
 
 	//Drop the accounts table
-	//$result = $wpdb->query( "DROP TABLE ".CSI_ACCOUNTS_TABLE.";" );
+	$result = $wpdb->query( "DROP TABLE ".CSI_ACCOUNTS_TABLE.";" );
 
 	//Clear out options
 	delete_option( HS_LOGIN_MEMBERSHIP_VERSION );
 	delete_option( HS_LOGIN_MEMBERSHIP_CSI_URL );
 	delete_option( HS_LOGIN_MEMBERSHIP_SHOW_NUMBER );
 	delete_option( HS_LOGIN_MEMBERSHIP_EMAIL_NOTIFY );
+	delete_option( HS_LOGIN_MEMBERSHIP_GOOGLE_FORM );
 }
 
 /**
@@ -141,6 +149,7 @@ function hs_login_membership_init()
 	global $hs_login_membership_csi_url;
 	global $hs_login_membership_show_number;
 	global $hs_login_membership_email_notify;
+	global $hs_login_membership_google_form;
 
 	if( !is_admin() )
 	{
@@ -148,6 +157,7 @@ function hs_login_membership_init()
 		$hs_login_membership_csi_url = get_option( HS_LOGIN_MEMBERSHIP_CSI_URL );
 		$hs_login_membership_show_number = get_option( HS_LOGIN_MEMBERSHIP_SHOW_NUMBER );
 		$hs_login_membership_email_notify = get_option( HS_LOGIN_MEMBERSHIP_EMAIL_NOTIFY );
+		$hs_login_membership_google_form = get_option( HS_LOGIN_MEMBERSHIP_GOOGLE_FORM );
 	}
 
 	wp_register_style( 'hs_login_membership_css', plugins_url('hs-login-membership.css', __FILE__) );

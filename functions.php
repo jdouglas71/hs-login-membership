@@ -66,8 +66,13 @@ function hs_login_form($width="100%")
  */
 function hs_membership_form($width="100%")
 {
+    //https://docs.google.com/spreadsheet/viewform?formkey=dGZLWU5PMHhHWGNuczZxOVRPdzBWQlE6MQ
+
     $retval = "";
 
+	$retval .= "<iframe frameborder='0' marginheight='1' marginwidth='1' scrolling='yes' src='".get_option(HS_LOGIN_MEMBERSHIP_GOOGLE_FORM)."' width='700' height='750'></iframe>";  
+
+	/*
 	$retval .= "<form id='hs-membership-form' method='POST'>";
 	$retval .= "<table class='hs_login_membership_table' width='100%' border='0' cellspacing='0' cellpadding='0'>";
 	$retval .= "<tr><td id='hs_login_membership_messages' colspan='2'></td></tr>";
@@ -117,6 +122,7 @@ function hs_membership_form($width="100%")
 	$retval .= "<tr><td id='hs_login_membership_submit_message' colspan='2'></td></tr>";
 	$retval .= "</table>";
 	$retval .= "</form>";
+	*/
 
     return $retval;
 }

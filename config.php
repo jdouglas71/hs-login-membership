@@ -14,6 +14,7 @@ define('HS_LOGIN_MEMBERSHIP_VERSION', "hs_login_membership_version");
 define('HS_LOGIN_MEMBERSHIP_CSI_URL', "hs_login_membership_csi_url");
 define('HS_LOGIN_MEMBERSHIP_SHOW_NUMBER', "hs_login_membership_show_number" );
 define('HS_LOGIN_MEMBERSHIP_EMAIL_NOTIFY', "hs_login_membership_email_notify" );
+define('HS_LOGIN_MEMBERSHIP_GOOGLE_FORM', "hs_login_membership_google_form" );
 
 /**Tables*/
 define('CSI_ACCOUNTS_TABLE', $wpdb->prefix."csi_accounts");
@@ -38,6 +39,9 @@ $hs_login_membership_show_number = 25;
 
 global $hs_login_membership_email_notify;
 $hs_login_membership_email_notify = "ttomlinson@healthsport.com";
+
+global $hs_login_membership_google_form;
+$hs_login_membership_google_form = "https://docs.google.com/spreadsheet/viewform?formkey=dGZLWU5PMHhHWGNuczZxOVRPdzBWQlE6MQ";
 
 /** Scripts */
 require_once(HS_LOGIN_MEMBERSHIP_DIR.'functions.php');

@@ -29,7 +29,7 @@ global $hs_login_membership_version;
 $hs_login_membership_version = "0.7";
 
 global $hs_login_membership_csi_url;
-$hs_login_membership_csi_url = "http://qasrv1:12121/OLS45_Site2/LoginFrame.aspx";
+$hs_login_membership_csi_url = "https://accounts.healthsport.com/LoginFrame.aspx";
 
 global $hs_icon_url;
 $hs_icon_url = "http://healthsport.com/favicon.ico";

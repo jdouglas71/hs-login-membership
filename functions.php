@@ -4,8 +4,6 @@
 //require_once(ABSPATH . WPINC . '/registration.php');
 require_once( ABSPATH . WPINC . '/class-phpmailer.php' );
 //Zend Library INclude path (for google docs integration)
-set_include_path( HS_LOGIN_MEMBERSHIP_CALLBACK_DIR . "ZendGdata-1.12.1/library" );
-include_once( HS_LOGIN_MEMBERSHIP_CALLBACK_DIR . "google-spreadsheet/Google_Spreadsheet.php" );
 
 
 /**

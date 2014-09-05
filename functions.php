@@ -19,7 +19,11 @@ function hs_login_form($width="100%")
 	$retval .= "<tr><td style='vertical-align:top;width:40%'>";
 	$retval .= "<div class='hs_login_div'>";
 	$retval .= "<h2 class='hs_login_membership_header'>Registered Customers</h2>";
-	$retval .= "<iframe frameborder='0' marginheight='1' marginwidth='1' scrolling='no' src='".get_option(HS_LOGIN_MEMBERSHIP_CSI_URL)."' width='330' height='250'></iframe>";  
+	$retval .= "&nbsp;<br />";
+	$retval .= "<input type='button' class='hs_form_button' onclick='location.href=\"https://online.spectrumng.net/healthsport\"' value='Member Login'>";
+
+
+	//$retval .= "<iframe frameborder='0' marginheight='1' marginwidth='1' scrolling='no' src='".get_option(HS_LOGIN_MEMBERSHIP_CSI_URL)."' width='330' height='250'></iframe>";  
 	//$retval .= "<form id='hs-login-form' method='POST'>";
 	//$retval .= "<table class='hs_login_membership_table' width='100%' border='0' cellspacing='0' cellpadding='0'>";
 	//$retval .= "<tr><td id='hs_login_membership_messages' colspan='2'></td></tr>";
@@ -47,11 +51,18 @@ function hs_login_form($width="100%")
 	$retval .= "<div class='hs_membership_div'>";
 	$retval .= "<h2 class='hs_login_membership_header'>Create an Account.</h2>";
 	$retval .= "&nbsp;<br />";
-	$retval .= "&nbsp;<br />";
-	$retval .= "&nbsp;<br />";
 	$retval .= "<input type='button' class='hs_form_button' onclick='location.href=\"".site_url(HS_LOGIN_MEMBERSHIP_PAGE)."\"' value='Create An Account'>";
 	$retval .= "</div>";
+	$retval .= "</td>";
+
+	$retval .= "<td style='vertical-align:top;'>";
+	$retval .= "<div class='hs_membership_div'>";
+	$retval .= "<h2 class='hs_login_membership_header'>Welcome</h2>";
+	$retval .= "&nbsp;<br />";
+	$retval .= "<input type='button' class='hs_form_button' onclick='location.href=\"".site_url("/new-member/")."\"' value='Welcome'>";
+	$retval .= "</div>";
 	$retval .= "</td></tr>";
+
 
 	$retval .= "</table>";
 	//$retval .= "</div>";
@@ -68,7 +79,9 @@ function hs_membership_form($width="100%")
 
     $retval = "";
 
-	$retval .= "<iframe frameborder='0' marginheight='1' marginwidth='1' scrolling='yes' src='".get_option(HS_LOGIN_MEMBERSHIP_GOOGLE_FORM)."' width='700' height='750'></iframe>";  
+	$retval .= "<input type='button' class='hs_form_button' onclick='location.href=\"https://online.spectrumng.net/healthsport\"' value='Member Login'>";
+
+	//$retval .= "<iframe frameborder='0' marginheight='1' marginwidth='1' scrolling='yes' src='".get_option(HS_LOGIN_MEMBERSHIP_GOOGLE_FORM)."' width='700' height='750'></iframe>";  
 
 	/*
 	$retval .= "<form id='hs-membership-form' method='POST'>";

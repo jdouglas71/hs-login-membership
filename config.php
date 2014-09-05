@@ -26,7 +26,7 @@ define('SCRIPT_DEBUG', true );
 
 /** Globals */
 global $hs_login_membership_version;
-$hs_login_membership_version = "0.7";
+$hs_login_membership_version = "0.9";
 
 global $hs_login_membership_csi_url;
 $hs_login_membership_csi_url = "https://accounts.healthsport.com/LoginFrame.aspx";

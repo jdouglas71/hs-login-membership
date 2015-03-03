@@ -18,40 +18,17 @@ function hs_login_form($width="100%")
 
 	$retval .= "<tr><td style='vertical-align:top;width:40%'>";
 	$retval .= "<div class='hs_login_div'>";
-	$retval .= "<h2 class='hs_login_membership_header'>Registered Customers</h2>";
+	$retval .= "<h2 class='hs_login_membership_header'>Registered Members</h2>";
 	$retval .= "&nbsp;<br />";
-	$retval .= "<input type='button' class='hs_form_button' onclick='location.href=\"https://online.spectrumng.net/healthsport\"' value='Member Login'>";
-
-
-	//$retval .= "<iframe frameborder='0' marginheight='1' marginwidth='1' scrolling='no' src='".get_option(HS_LOGIN_MEMBERSHIP_CSI_URL)."' width='330' height='250'></iframe>";  
-	//$retval .= "<form id='hs-login-form' method='POST'>";
-	//$retval .= "<table class='hs_login_membership_table' width='100%' border='0' cellspacing='0' cellpadding='0'>";
-	//$retval .= "<tr><td id='hs_login_membership_messages' colspan='2'></td></tr>";
-	//$retval .= "<tr><td>";	
-	//$retval .= "<label for='hs_username' class='hs_login_membership_label'>E-mail Address</label>";
-	//$retval .= "</td><td>";
-	//$retval .= "<input type='text' autofocus='autofocus' id='hs_username' class='hs_login_membership_input'>";
-	//$retval .= "</td></tr>";
-	//$retval .= "<tr><td>";	
-	//$retval .= "<label for='hs_password' class='hs_login_membership_label'>Password</label>";
-	//$retval .= "</td><td>";
-	//$retval .= "<input type='password' id='hs_password' class='hs_login_membership_input'>";
-	//$retval .= "</td></tr>";
-	//$retval .= "<tr><td></td><td style='text-align:left;'>";
-	//$retval .= "<input type='submit' value='Login' class='hs_form_button' id='hs_login' onClick='hs_login_membership_login_user(); return false;'/>";
-	//$retval .= "</td></tr>";
-	//$retval .= "<tr><td id='hs_login_membership_submit_message' colspan='2'></td></tr>";
-	//$retval .= "</table>";
-	//$retval .= "</form>";
-	//$retval .= "<a href='".wp_lostpassword_url()."' title='Lost Password'>Lost Password?</a>";
-	//$retval .= "</div>";
-	//$retval .= "</td>";
+	//$retval .= "<input type='button' class='hs_form_button' onclick='location.href=\"https://online.spectrumng.net/healthsport\"' value='Member Login'>";
+	$retval .= "<a class='et_pb_more_button' href='https://online.spectrumng.net/healthsport'>Member Login</a>";
 
 	$retval .= "<td style='vertical-align:top;'>";
 	$retval .= "<div class='hs_membership_div'>";
 	$retval .= "<h2 class='hs_login_membership_header'>Create an Account.</h2>";
 	$retval .= "&nbsp;<br />";
-	$retval .= "<input type='button' class='hs_form_button' onclick='location.href=\"".site_url(HS_LOGIN_MEMBERSHIP_PAGE)."\"' value='Create An Account'>";
+	//$retval .= "<input type='button' class='hs_form_button' onclick='location.href=\"".site_url(HS_LOGIN_MEMBERSHIP_PAGE)."\"' value='Create An Account'>";
+	$retval .= "<a class='et_pb_more_button' href='https://online.spectrumng.net/healthsport'> Create An Account</a>";
 	$retval .= "</div>";
 	$retval .= "</td>";
 
@@ -59,7 +36,8 @@ function hs_login_form($width="100%")
 	$retval .= "<div class='hs_membership_div'>";
 	$retval .= "<h2 class='hs_login_membership_header'>Welcome</h2>";
 	$retval .= "&nbsp;<br />";
-	$retval .= "<input type='button' class='hs_form_button' onclick='location.href=\"".site_url("/new-member/")."\"' value='Welcome'>";
+	//$retval .= "<input type='button' class='hs_form_button' onclick='location.href=\"".site_url("/healthsport-membership/members-welcome/")."\"' value='Welcome'>";
+	$retval .= "<a class='et_pb_more_button' href='".site_url("/healthsport-membership/members-welcome/")."'>Welcome</a>";
 	$retval .= "</div>";
 	$retval .= "</td></tr>";
 
